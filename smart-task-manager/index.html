@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Task Manager — A modern SaaS-style productivity dashboard with task management, priority levels, due dates, progress tracking, and dark mode.">
+  <meta name="theme-color" content="#4f46e5">
+  <title>Smart Task Manager — Productivity Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ====== PREMIUM HEADER / HERO ====== -->
+  <header class="app-header" id="app-header">
+    <div class="header-top">
+      <div class="app-title">
+        <div class="app-title-icon">
+          <!-- Clipboard-check icon -->
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+            <path d="m9 14 2 2 4-4"/>
+          </svg>
+        </div>
+        <h1>Smart Task Manager</h1>
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <!-- Sun icon -->
+        <svg class="icon-sun" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Moon icon -->
+        <svg class="icon-moon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Motivational Subtitle -->
+    <p class="header-subtitle">Stay productive and organize your day efficiently</p>
+
+    <!-- Statistics Dashboard -->
+    <div class="stats-dashboard" id="stats-dashboard">
+      <div class="stat-card">
+        <div class="stat-card-icon total-icon">📊</div>
+        <div class="stat-card-value" id="stat-total">0</div>
+        <div class="stat-card-label">Total Tasks</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon pending-icon">⏳</div>
+        <div class="stat-card-value" id="stat-pending">0</div>
+        <div class="stat-card-label">Pending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon done-icon">✅</div>
+        <div class="stat-card-value" id="stat-done">0</div>
+        <div class="stat-card-label">Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon rate-icon">📈</div>
+        <div class="stat-card-value" id="stat-rate">0%</div>
+        <div class="stat-card-label">Rate</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="container">
+
+    <!-- Progress Section -->
+    <section class="progress-section" id="progress-section">
+      <div class="progress-header">
+        <span class="progress-label">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="20" x2="12" y2="10"/>
+            <line x1="18" y1="20" x2="18" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="16"/>
+          </svg>
+          Overall Progress
+        </span>
+        <span class="progress-percentage" id="progress-percentage">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </section>
+
+    <!-- Task Input Area -->
+    <section class="task-input-area" id="task-input-area">
+      <div class="input-main-row">
+        <input
+          type="text"
+          id="task-title-input"
+          class="task-title-input"
+          placeholder="✨ What needs to be done?"
+          maxlength="120"
+          autocomplete="off"
+        >
+        <button class="add-btn" id="add-task-btn" aria-label="Add task">
+          <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Add Task
+        </button>
+      </div>
+      <div class="input-options-row">
+        <select id="priority-select" class="priority-select" aria-label="Task priority">
+          <option value="medium">⚡ Medium Priority</option>
+          <option value="high">🔴 High Priority</option>
+          <option value="low">🟢 Low Priority</option>
+        </select>
+        <input
+          type="date"
+          id="due-date-input"
+          class="due-date-input"
+          aria-label="Due date"
+        >
+      </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-area" id="search-area">
+      <svg class="search-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="Search tasks..."
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- Pending Tasks Section -->
+    <section class="task-section" id="pending-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg class="section-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Pending Tasks
+        </h2>
+        <span class="section-count" id="pending-count">0</span>
+      </div>
+      <div class="task-list" id="pending-list">
+        <!-- Tasks rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Completed Tasks Section -->
+    <section class="task-section" id="completed-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg class="section-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Completed Tasks
+        </h2>
+        <span class="section-count" id="completed-count">0</span>
+      </div>
+      <div class="task-list" id="completed-list">
+        <!-- Tasks rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="app-footer">
+    Built with ❤️ by <span>Smart Task Manager</span> &copy; 2026
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
